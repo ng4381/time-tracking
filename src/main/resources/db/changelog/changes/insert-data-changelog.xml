@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+
+    <changeSet id="insert_nik_1" author="Nikita Goloveshko">
+        <insert tableName="cat_expectations">
+            <column name="cat_name" value="Работа"/>
+            <column name="cat_priority" value="1"/>
+        </insert>
+        <insert tableName="cat_expectations">
+            <column name="cat_name" value="Учеба"/>
+            <column name="cat_priority" value="2"/>
+        </insert>
+        <insert tableName="cat_expectations">
+            <column name="cat_name" value="Сон"/>
+            <column name="cat_priority" value="3"/>
+        </insert>
+        <insert tableName="cat_expectations">
+            <column name="cat_name" value="Игрушки"/>
+            <column name="cat_priority" value="4"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

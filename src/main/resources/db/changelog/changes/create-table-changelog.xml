@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+
+    <changeSet id="nik_1" author="Nikita Goloveshko">
+        <createTable tableName="cat_expectations">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="cat_expectations_id_pk" />
+            </column>
+            <column name="cat_name" type="varchar(250)"/>
+            <column name="cat_priority" type="int" />
+        </createTable>
+    </changeSet>
+
+    <changeSet id="nik_2" author="Nikita Goloveshko">
+        <createTable tableName="cat_facts">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="cat_expectations_id_pk" />
+            </column>
+            <column name="cat_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_cat_facts_cat_expectations" references="cat_expectations(id)"/>
+            </column>
+            <column name="cat_priority" type="int" />
+        </createTable>
+
+        <createTable tableName="hours">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="cat_expectations_id_pk" />
+            </column>
+            <column name="day_name" type="varchar(250)"/>
+            <column name="cat_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_hours_cat_expectations" references="cat_expectations(id)"/>
+            </column>
+            <column name="datetime" type="datetime" />
+        </createTable>
+    </changeSet>
+
+
+</databaseChangeLog>
