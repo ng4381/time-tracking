@@ -19,10 +19,14 @@ public class UserActivityService {
     private final UserDateTimeActivityService userDateTimeActivityService;
     private final CategoryService categoryService;
 
+    private LocalDateTime getStartOfPreviousHour() {
+        LocalDateTime dateTime = LocalDateTime.now(Clock.systemDefaultZone()).minusHours(1);
+        return LocalDate.now().atTime(dateTime.getHour(),0);
+    }
+
     public void process() {
         for (IUserActivity userActivity : userActivities) {
-            LocalDateTime dateTime = LocalDateTime.now(Clock.systemDefaultZone()).minusHours(1);
-            dateTime = LocalDate.now().atTime(dateTime.getHour(),0);
+            LocalDateTime dateTime = getStartOfPreviousHour();
 
             if (userActivity.isActive(dateTime)) {
                 UserDateTimeActivity userDateTimeActivity = UserDateTimeActivity.builder()

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class SystemInfoReader {
@@ -16,10 +18,13 @@ public class SystemInfoReader {
      *         powershell.exe Get-EventLog –LogName ‘Application’ -After 3/1/2023
      *         powershell.exe (Get-Process -Name Skype).StartTime
      *
+     *         (Get-Process -Name Skype).StartTime.GetDateTimeFormats()[0]
+     *
      * @throws Exception
      */
 
-    public void executePowerShellCommand(String command) throws Exception {
+    public List<String> executePowerShellCommand(String command) throws Exception {
+        List<String> result = new ArrayList<>();
         Process powerShellProcess = Runtime.getRuntime().exec(command);
 
         powerShellProcess.getOutputStream().close();
@@ -29,6 +34,7 @@ public class SystemInfoReader {
                 powerShellProcess.getInputStream()));
         while ((line = stdout.readLine()) != null) {
             System.out.println(line);
+            result.add(line);
         }
         stdout.close();
         System.out.println("Standard Error:");
@@ -36,9 +42,11 @@ public class SystemInfoReader {
                 powerShellProcess.getErrorStream()));
         while ((line = stderr.readLine()) != null) {
             System.out.println(line);
+
         }
         stderr.close();
         System.out.println("Done");
+        return result;
     }
 
     private void EventLogJNA() {
