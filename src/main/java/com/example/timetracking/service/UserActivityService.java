@@ -5,6 +5,7 @@ import com.example.timetracking.entity.UserDateTimeActivity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Clock;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
@@ -20,8 +21,8 @@ public class UserActivityService {
 
     public void process() {
         for (IUserActivity userActivity : userActivities) {
-            LocalDateTime dateTime = LocalDateTime.now().minusHours(1);
-            dateTime = LocalDate.EPOCH.atTime(dateTime.getHour(),0);
+            LocalDateTime dateTime = LocalDateTime.now(Clock.systemDefaultZone()).minusHours(1);
+            dateTime = LocalDate.now().atTime(dateTime.getHour(),0);
 
             if (userActivity.isActive(dateTime)) {
                 UserDateTimeActivity userDateTimeActivity = UserDateTimeActivity.builder()
